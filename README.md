@@ -1,6 +1,6 @@
 # This Repository is meant for Exercise
 
-*What is the point?*
+## *What is the point?*
 
 - I do not have much practice in free coding, and while I have done e.g. AoC exercises in the past, in both TypeScript and Python, any muscle memory I had when considering Syntax is gone at the moment. 
 > To get back in shape 
@@ -11,13 +11,13 @@
 
 
 
-*What happens when I get stuck?*
+## *What happens when I get stuck?*
 
 - We'll see, but watch the rating below 
 
 
 
-*DATA*
+## *DATA*
 
 - Date of exercise start: 31 Aug 2026
 
@@ -30,6 +30,6 @@
 
 
 
-*Exception*
+## *Exception*
 
 - I will be AFK between 6.-14th Sept. (Streak will still end - but be noted)
