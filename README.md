@@ -1,4 +1,4 @@
-**This Repository is meant for Exercise**
+# This Repository is meant for Exercise
 
 *What is the point?*
 
@@ -9,9 +9,13 @@
 
 - These are not meant to be polished solutions, but rather quick and dirty 
 
+
+
 *What happens when I get stuck?*
 
 - We'll see, but watch the rating below 
+
+
 
 *DATA*
 
@@ -23,6 +27,8 @@
 - Help required beside documentations: 
 > 
 > 
+
+
 
 *Exception*
 
