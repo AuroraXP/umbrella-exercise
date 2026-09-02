@@ -24,7 +24,7 @@
 - Consecutive day streak:
 > 2 (active)
 
-- Help required beside documentations: 
+- Help required beside documentations & Stack Overflow: 
 > 
 > 
 
