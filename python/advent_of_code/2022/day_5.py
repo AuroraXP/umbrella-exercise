@@ -102,7 +102,7 @@ for command in movement_commands:
     for a in range(amounts): # move them piece by piece to get the "upper" one first
 
         moving = columns[take_from][0]
-        columns[take_from].remove(columns[take_from][0])
+        columns[take_from].remove(columns[take_from][0]) # deletes first element in list, that is "columns[take_from][0])"
 
         columns[take_to].insert(0,moving) # move in to the left of the list (top side)
 
@@ -119,3 +119,50 @@ for i in columns:
 
 print('')
 print('')
+
+print('')
+print('-'* 20)
+print("Solution to Part 2: ")
+print('-'* 20)
+print('')
+
+
+columns, movement_commands = parsing_day_5(data_path)
+
+
+# Moving function  - moving multiple crates at once
+
+for command in movement_commands:
+    blocks_list = 0
+
+    amounts = int(command[0])
+    take_from = int(command[1])-1
+    take_to = int(command[2])-1
+
+    for block in columns[take_from]:
+        blocks_list = blocks_list+1
+
+    if blocks_list < amounts:
+        raise ValueError("You are trying to raise blocks where there are none!")
+
+    for i in range(amounts): 
+
+        moving = columns[take_from][(amounts-1)-int(i)]
+        columns[take_from].pop((amounts-1)-int(i)) # Removes a specific index 
+        
+        columns[take_to].insert(0,moving) # move in to the left of the list (top side)
+
+
+
+# Control
+for l in columns:
+    print (l)
+            
+
+
+    
+    
+
+
+
+
