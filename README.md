@@ -5,7 +5,7 @@
 - I do not have much practice in free coding, and while I have done e.g. AoC exercises in the past, in both TypeScript and Python, any muscle memory I had built, I now find a bit lacking. 
 > To get back in shape 
 
-- Getting back into Python programming - the point is: no AI if possible (see DATA - Help required)
+- Getting back into simple programming - the point is: no AI if possible
 
 - These are not meant to be polished solutions, but rather quick and dirty 
 
@@ -23,11 +23,6 @@
 
 - Consecutive day streak:
 > 5 (active)
-
-- Help required beside documentations & Stack Overflow: 
->  1
-
-
 
 
 ## *Exception*
