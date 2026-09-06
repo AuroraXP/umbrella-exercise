@@ -1,4 +1,4 @@
-import { count } from "node:console";
+import { error } from "node:console";
 import { readFile } from "node:fs/promises";
 
 const data = await readFile(new URL("input/day-3.txt", import.meta.url), ("utf8"));
@@ -66,3 +66,106 @@ console.log("The power consumption of the submarine is: ", gammaRateAmount*epsil
 console.log(" ")
 
 
+
+
+// PART 2
+
+
+console.log(" ")
+console.log("Part 2")
+console.log(" ")
+
+
+let oxygenGen = binaryLines.slice();
+let COScrubber = binaryLines.slice();
+
+
+
+while (oxygenGen.length > 1){
+
+    for (let i = 0; i < oxygenGen[0].length; i++){
+        let counter = 0
+        let keepValue: string;
+
+
+        for (let line = 0; line < oxygenGen.length; line++){
+           if (oxygenGen[line][i] == "1"){
+            counter = counter + 1
+           }
+        }
+
+        if (counter > (oxygenGen.length/2)){
+            keepValue = "1";
+        }
+
+        else if (counter == (oxygenGen.length/2)){
+            keepValue = "1";
+        }
+
+        else {
+            keepValue = "0";
+        }
+
+        oxygenGen = oxygenGen.filter(line => line[i] === keepValue);
+        
+    }
+}
+   
+
+const oxygenRating = oxygenGen[0]
+
+if (oxygenGen.length != 1){
+   error("Your filtering process failed! Fix it!")
+}    
+
+console.log("The oxygen generator rating: ", oxygenRating)
+console.log(" ")
+
+
+while (COScrubber.length > 1){
+
+    for (let i = 0; i < COScrubber[0].length; i++){
+        let counter = 0
+        let keepValue: string;
+
+
+        for (let line = 0; line < COScrubber.length; line++){
+           if (COScrubber[line][i] == "1"){
+            counter = counter + 1
+           }
+        }
+
+        if (counter > (COScrubber.length/2)){
+            keepValue = "0";
+        }
+
+        else if (counter == (COScrubber.length/2)){
+            keepValue = "0";
+        }
+
+        else {
+            keepValue = "1";
+        }
+
+        COScrubber = COScrubber.filter(line => line[i] === keepValue);
+        if (COScrubber.length == 1){
+            break
+        }
+
+        }
+    }
+
+const CO2Rating = COScrubber[0]
+
+if (COScrubber.length != 1){
+   error("Your filtering process failed! Fix it!")
+}   
+
+console.log("The CO2 scrubber rating: ", CO2Rating)
+console.log(" ")
+
+let oxygenRateAmount = parseInt(oxygenRating, 2);
+let CO2RateAmount = parseInt(CO2Rating, 2);
+
+console.log("The life support rating of the submarine is: ", oxygenRateAmount*CO2RateAmount)
+console.log(" ")
