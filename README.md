@@ -22,9 +22,7 @@
 - Date of exercise start: 31 Aug 2026
 
 - Consecutive day streak:
-> 7 (active)
+> 7 (ended)
+> 1 (active)
 
 
-## *Exception*
-
-- I will be AFK between 6.-14th Sept. (Streak will still end - but be noted)
