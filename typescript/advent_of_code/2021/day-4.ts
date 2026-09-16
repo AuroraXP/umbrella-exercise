@@ -68,8 +68,8 @@ for ( let i = 2; i < lines.length; i++){
 // Winning logic : whole line/row required - first board as output 
 // Check all rows, check all lines (first with numbers matching all wins)
 
-let winningBoard = 100;
-let winningDraw = 100
+let winningBoard = 200;
+let winningDraw = 200;
 
 outer: for(let draw = 4; draw < calledNumbers.length; draw++){
 
@@ -153,3 +153,117 @@ for (const s of goldBoard){
 // multiply by last drawn value
 
 console.log("The final score is: ", sumOfUnmarked * calledNumbers[winningDraw])
+
+// Part 2
+
+console.log(" ");
+console.log(" ");
+console.log(" ");
+
+console.log("Part 2");
+console.log(" ");
+
+let losingBoard = 200;
+let losingDraw = 200;
+let winList: number[] = [];
+
+console.log(" The number of boards is: ", bingoBoards.size);
+
+
+loser: for(let draw = 4; draw < calledNumbers.length; draw++){
+
+    // List of already drawn numbers
+    let calledList = [];
+
+        for(let d = 0; d <= draw; d++){
+            calledList.push(calledNumbers[d]);
+        }
+
+        let vCounter = 0;
+
+        for(const v of bingoBoards.values()){
+
+            // Check rows
+            for(const s of v){
+                let rowFive = 0;
+
+                for(const number of s){
+                    if (calledList.includes(number)){
+                        rowFive = rowFive + 1;
+                    }
+                }
+                if (rowFive == 5){
+                    winningBoard = 0;
+                    winningBoard = vCounter;
+                    winningDraw = draw;
+                    if (winList.includes(winningBoard)){
+                        continue
+                    }
+                    else{
+                        winList.push(winningBoard);
+                    }
+                }
+            }
+
+            // Check columns
+                for(let i = 0; i < v.length; i++){  
+                    let colFive = 0;
+                    for(const s of v){
+                        if (calledList.includes(s[i])){
+                            colFive = colFive + 1;
+                        }
+                    if (colFive == 5){
+
+                        winningBoard = 0;
+                        winningBoard = vCounter;
+                        winningDraw = draw;
+
+                        if (winList.includes(winningBoard)){
+                            continue
+                        }
+                        else{
+                            winList.push(winningBoard);
+                        }
+                    }
+                }
+            }
+
+            vCounter = vCounter + 1;
+
+            if (winList.length == bingoBoards.size){
+                losingBoard = winningBoard;
+                losingDraw = winningDraw;
+                break loser;
+            }
+        }   
+}
+
+console.log(" ");
+console.log(" The losing board is: ", losingBoard," | After draw: ", losingDraw)
+console.log(" ");
+
+
+// Define winning Board data
+const coldBoard = bingoBoards.get(losingBoard);
+
+
+// Calculate sum of unmarked numbers
+
+let marked = [];
+for(let n = 0; n < losingDraw+1; n++){
+    marked.push(calledNumbers[n])
+}
+
+let sum = 0
+
+for (const s of coldBoard){
+    for(const n of s){
+        if (marked.includes(n)){
+            continue
+        }
+        else{
+            sum= sum + n
+        }
+    }
+}
+console.log("The final score is: ", sum * calledNumbers[losingDraw])
