@@ -10,19 +10,12 @@
 - These are not meant to be polished solutions, but rather quick and dirty 
 
 
-
-## *What happens when I get stuck?*
-
-- We'll see, but watch the rating below 
-
-
-
 ## *DATA*
 
 - Date of exercise start: 31 Aug 2026
 
 - Consecutive day streak:
 > 7 (ended)
-> 2 (active)
+> 3 (active)
 
 
