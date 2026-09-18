@@ -10,8 +10,8 @@ const onlyLinesBeginY: number[] = [];
 const onlyLinesEndX: number[] = [];
 const onlyLinesEndY: number[] = [];
 
-// Part 1 
-// Parsing only horizontal and vertical line coordinates
+// Part 2 
+
 
 for (let i = 0; i < lines.length; i++){
 
@@ -25,12 +25,11 @@ for (let i = 0; i < lines.length; i++){
     const x2 = Number(lineEnd[0]);
     const y2 = Number(lineEnd[1]);
 
-    if (x1 == x2 || y1 == y2){
-        onlyLinesBeginX.push(x1);
-        onlyLinesBeginY.push(y1);
-        onlyLinesEndX.push(x2);
-        onlyLinesEndY.push(y2);
-    }
+    onlyLinesBeginX.push(x1);
+    onlyLinesBeginY.push(y1);
+    onlyLinesEndX.push(x2);
+    onlyLinesEndY.push(y2);
+
 
 }
 
@@ -42,6 +41,7 @@ let interceptListXY: string[] = [];
 
 let inner1 = 0;
 let inner2 = 0;
+
 
 
 // Intercept counting
@@ -198,10 +198,28 @@ for (let i = 0; i < onlyLinesBeginX.length; i++){
                     }
                 }
             }
+            
+            else{
+                // j is diagonal — i is vertical at x1
+
+                if (xj1 <= x1 && xj2 >= x1){
+
+                    let impactSteps = x1 - xn1;   // anchor from xn1, not xj1
+                    let y = yn1 + impactSteps*((yn2-yn1)/(xn2-xn1));
+
+                    if (y >= yi1 && y <= yi2){
+
+                        let key = String(x1) + "," + String(y);
+                        if (!interceptListXY.includes(key)){
+                            interceptListXY.push(key);
+                        }
+                    }
+                }
+            }
 
         }
 
-        if (y1 == y2){
+        else if (y1 == y2){
 
             // Vertical lines on the same horizontal position
 
@@ -267,7 +285,7 @@ for (let i = 0; i < onlyLinesBeginX.length; i++){
                         
             }
 
-            // two vertical lines parallel to each other
+            // two horizontal lines parallel to each other
             else if(yj1 == yj2){
                 continue
             }
@@ -286,16 +304,163 @@ for (let i = 0; i < onlyLinesBeginX.length; i++){
                 }
             }
 
+
+            else{
+                // j is diagonal — i is horizontal at y1
+
+                if (yj1 <= y1 && yj2 >= y1){
+
+                    let impactSteps = y1 - yn1;   // anchor from yn1, not yj1
+                    let x = xn1 + impactSteps*((xn2-xn1)/(yn2-yn1));
+
+                    if (x >= xi1 && x <= xi2){
+
+                        let key = String(x) + "," + String(y1);
+                        if (!interceptListXY.includes(key)){
+                            interceptListXY.push(key);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Here the PART 2 consideration takes place - considering all diagonals
+
+        else{
+
+            //diagonal x verticles
+            if (xn1 == xn2){
+                if (xi1 <= xj1 && xi2 >= xj1){
+                    
+                    let impactSteps = xj1 - x1
+                    let y = y1 + impactSteps*((y2-y1)/(x2-x1))
+
+                    if (y >= yj1 && y <= yj2){
+
+                        if (interceptListXY.includes(String(xj1) + "," + String(y))){
+                            continue
+                        }
+                        else{
+                            interceptListXY.push(String(xj1) + "," + String(y));
+                        }
+
+                    }
+                }
+            }
+
+
+            // diagonal x horizontals
+
+            else if (yj1 == yj2){
+                if (yi1 <= yj1 && yi2 >= yj1){
+                    
+                    let impactSteps = yj1 - y1
+                    let x = x1 + (impactSteps*((x2-x1)/(y2-y1)))
+
+                    if (x >= xj1 && x <= xj2){
+
+                        if (interceptListXY.includes(String(x) + "," + String(yj1))){
+                            continue
+                        }
+                        else{
+                            interceptListXY.push(String(x) + "," + String(yj1));
+                        }
+
+                    }
+                }
+            }
+            
+            // diagonal x diagonal
+
+            else {
+
+                // same direction
+                // no touching
+
+                if (((y2-y1)/(x2-x1)) == (yn2-yn1)/(xn2-xn1)){
+                    if ((yj2 < yi1 && xj2 < xi1) || (yj1 > yi2 && xj1 > xi2)){
+                        continue
+                    }
+
+                    else {
+                        let overlapCheckStart = Math.max(yi1, yj1);
+                        let overlapCheckEnd = Math.min(yi2, yj2);
+
+                        if (overlapCheckStart <= overlapCheckEnd){
+
+                            let impactStepsi = overlapCheckStart - y1;
+                            let xi = x1 + (impactStepsi*((x2-x1)/(y2-y1)))
+
+                            let impactStepsj = overlapCheckStart - yn1;
+                            let xj = xn1 + (impactStepsj*((xn2-xn1)/(yn2-yn1)))
+
+                            if (xi == xj){
+
+                                let overlapStart = Math.max(yi1, yj1);
+                                let overlapEnd = Math.min(yi2, yj2);
+
+                                for (let y = overlapStart; y <= overlapEnd; y++){
+                                    let steps = y - y1;
+                                    let x = x1 + (steps * ((x2 - x1) / (y2 - y1)));
+
+                                    let key = String(x) + "," + String(y);
+                                    if (!interceptListXY.includes(key)){
+                                        interceptListXY.push(key);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                // Orthogonal diagonal lines 
+                else{
+                    if ((xi1 <= xj1 && xi2 >= xj2) || (xj1 <= xi1 && xj2 >= xi2) || (xj1 <= xi2 && xj2 >= xi2) || (xi1 <= xj2 && xi2 >= xj2)){
+                        if((yi1 <= yj2 && yi2 >= yj1) || (yi1 >= yj2 && yi2 <= yj1))
+                            for( let n = xi1; n <= xi2; n ++){
+                                if (n >= xj1 && n <=xj2){
+                                    let countedSteps = n - x1;
+                                    let y = y1 + countedSteps*((y2-y1)/(x2-x1))
+                                    
+                                    let countedStepsj = n - xn1;
+                                    let yj = yn1 + countedStepsj*((yn2-yn1)/(xn2-xn1))
+
+                                    if (yj == y){
+
+                                        let key = String(n) + "," + String(y);
+                                        if (!interceptListXY.includes(key)){
+                                            interceptListXY.push(key);
+                                        }
+                                    }
+                                }
+                        
+                        }
+                    
+                    }
+
+
+                }
+
+
+
+            }
+
+
         }
 
     }
-             
+
 }
 
+
+
 console.log(" ");
-console.log("Part 1");
+console.log("Part 2");
 console.log(" ");
-console.log("The amount of singular overlaps of at least two lines is: ", interceptListXY.length);
+console.log("The amount of singular overlaps of at least two lines considering diagonals is : ", interceptListXY.length);
+
+
 
 
 function embracedLine(interceptListXY: string[], inner1:number, inner2:number, unchangedValue:number, unchanged:string){
@@ -400,4 +565,7 @@ function equalLines(interceptListXY:string[], overlap1: number, overlap2: number
     }
 
 }
+
+
+
 
