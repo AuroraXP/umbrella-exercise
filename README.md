@@ -2,12 +2,12 @@
 
 ## *What is the point?*
 
-- I do not have much practice in free coding, and while I have done e.g. AoC exercises in the past, in both TypeScript and Python, any muscle memory I had built, I now find a bit lacking. 
-> To get back in shape 
+- The purpose of this repository is steady exercise and learning new techniques 
+    - A combination of quick and dirty exercise and trying to learn new skills 
 
-- Getting back into simple programming - the point is: no AI if possible
+- You might see bigger and smaller messes here - as my skill set grows I aim to build better and more efficient solutions with each new exercise 
 
-- These are not meant to be polished solutions, but rather quick and dirty 
+
 
 
 ## *DATA*
@@ -16,6 +16,6 @@
 
 - Consecutive day streak:
 > 7 (ended)
-> 4 (active)
+> 5 (active)
 
 
