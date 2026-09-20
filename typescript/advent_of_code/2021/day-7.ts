@@ -10,7 +10,7 @@ console.log(" ");
 
 // Least amount of movement necessary - solved with median
 
-console.log(crabPositions);
+// console.log(crabPositions);
 
 let sortedCrab = crabPositions.sort((a,b) => a-b);
 
@@ -33,3 +33,21 @@ console.log(" ");
 
 // Least amount of multiple steps
 
+let positionSum = 0;
+
+for (let i = 0; i < crabPositions.length; i++){
+    positionSum += crabPositions[i];
+}
+
+let mean = Math.floor(positionSum/crabPositions.length)
+
+let requiredFuel = 0;
+
+for (let n of crabPositions){
+    let fuelSteps = Math.max(n, mean) - Math.min(n, mean);
+    for (let f = 0; f <= fuelSteps; f++){    
+        requiredFuel += f
+    }
+}
+
+console.log("The fuel required with considering increasing amount of fuel at each step: ", requiredFuel, "\n")
