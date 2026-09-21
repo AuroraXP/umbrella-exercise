@@ -16,6 +16,6 @@
 
 - Consecutive day streak:
 > 7 (ended)
-> 6 (active)
+> 7 (active)
 
 
