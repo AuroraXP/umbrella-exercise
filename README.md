@@ -15,7 +15,7 @@
 - Date of exercise start: 31 Aug 2026
 
 - Consecutive day streak:
-> 7 (ended)
-> 7 (active)
+> 7 (ended) 
+> 8 (active)
 
 
