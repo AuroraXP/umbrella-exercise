@@ -5,9 +5,8 @@
 - The purpose of this repository is steady exercise and learning new techniques 
     - A combination of quick and dirty exercise and trying to learn new skills 
 
-- You might see bigger and smaller messes here - as my skill set grows I aim to build better and more efficient solutions with each new exercise 
-
-
+- You might see bigger and smaller messes here - as my skill set grows I aim to build
+ better and more efficient solutions with each new exercise 
 
 
 ## *DATA*
@@ -16,6 +15,6 @@
 
 - Consecutive day streak:
 > 7 (ended) 
-> 8 (active)
+> 9 (active)
 
 
