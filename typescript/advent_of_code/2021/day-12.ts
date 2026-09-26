@@ -36,27 +36,37 @@ let options = true;
 
 let pathsLongGone = new Array();
 
-while (options == true){
+const todo = [["start"]];
 
-    let visitedSmalls = new Array();
-    let buildStack = new Array();
 
-    for (const [cave1, cave2] of parseCaves){
+while (todo.length > 0) {
+    const buildStack = todo.pop()!;
 
-        if (buildStack.length == 0){
-          buildStack.push('start');  
+    if (buildStack.length == 0){
+        buildStack.push('start');  
         }
 
-        let caveHere = buildStack[buildStack.length-1]
-        // console.log(caveHere)
-        // options = false
+        const caveHere = buildStack[buildStack.length - 1];
+        const neighbors = [];
 
 
+        for (const [cave1, cave2] of parseCaves) {
+            if (cave1 === caveHere && !(smallCaves.includes(cave2) && buildStack.includes(cave2))) {
+                neighbors.push(cave2);
+            }
+        }
 
+
+    for (const next of neighbors) {
+        if (next === "end") pathsLongGone.push([...buildStack, "end"]);
+        else todo.push([...buildStack, next]);
     }
-
 
 }
 
+console.log(" ");
+console.log("Part 1");
+console.log(" ");
 
+console.log(pathsLongGone.length);
 
