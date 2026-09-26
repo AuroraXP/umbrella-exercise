@@ -20,7 +20,7 @@ I started with Python and now continue in TypeScript.
 
 Puzzle inputs are not included in this repository (Advent of Code asks people not to
 publish them). To run a solution, put your own input in the `input/` folder next to it,
-named like the day, e.g. `input/day-10.txt` (TypeScript) or `input/day_1.txt` (Python).
+named like the day, e.g. `input/day-1.txt`.
 
 ### TypeScript (pnpm)
 
