@@ -3,18 +3,44 @@
 ## *What is the point?*
 
 - The purpose of this repository is steady exercise and learning new techniques 
-    - A combination of quick and dirty exercise and trying to learn new skills 
 
-- You might see bigger and smaller messes here - as my skill set grows I aim to build
- better and more efficient solutions with each new exercise 
+## *Languages*
+
+Solutions to [Advent of Code](https://adventofcode.com) puzzles in two languages:
+
+| Language | Folder |
+|---|---|
+| Python | `python/advent_of_code/<year>` |
+| TypeScript | `typescript/advent_of_code/<year>` |
+
+I started with Python and now continue in TypeScript.
 
 
-## *DATA*
+## *How to run a day*
+
+Puzzle inputs are not included in this repository (Advent of Code asks people not to
+publish them). To run a solution, put your own input in the `input/` folder next to it,
+named like the day, e.g. `input/day-10.txt` (TypeScript) or `input/day_1.txt` (Python).
+
+### TypeScript (pnpm)
+
+```bash
+cd typescript
+pnpm install                                  # first time only
+pnpm aoc advent_of_code/<year>/day-<n>.ts
+```
+
+### Python
+
+```bash
+cd python
+python -m venv .venv && source .venv/bin/activate   # first time only
+pip install -r requirements.txt                     # first time only
+cd advent_of_code/<year>                            # run from the year folder,
+python day_<n>.py                                   # the input path is relative
+```
+
+
+## *Started*
 
 - Date of exercise start: 31 Aug 2026
-
-- Consecutive day streak:
-> 7 (ended) 
-> 12 (active)
-
-
