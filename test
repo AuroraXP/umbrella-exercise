@@ -78,6 +78,12 @@ let oldPaths = new Array();
 
 let newDo = [["start"]];
 
+let secondSmall = false;
+
+smallCaves.push("start")
+
+const hasDouble = (path: string[]) =>
+    path.some((cave, i) => smallCaves.includes(cave) && path.indexOf(cave) !== i);
 
 while (newDo.length > 0) {
     const buildStack = newDo.pop()!;
@@ -88,22 +94,13 @@ while (newDo.length > 0) {
         const caveHere = buildStack[buildStack.length - 1];
         const neighbors = [];
 
-        let usedDouble = false;
-        const seen:Array<string> = [];
-        for (const cave of buildStack) {
-            if (smallCaves.includes(cave)) {
-                if (seen.includes(cave)) usedDouble = true;  // found this small cave before
-                else seen.push(cave);
-            }
-        }
+
+        const usedDouble = hasDouble(buildStack);
 
         for (const [cave1, cave2] of parseCaves) {
             if (cave1 !== caveHere || cave2 === "start") continue;
                 const alreadyVisited = smallCaves.includes(cave2) && buildStack.includes(cave2);
-            if (!alreadyVisited || !usedDouble) {
-                neighbors.push(cave2);
-            }
-                
+            if (!alreadyVisited || !usedDouble) neighbors.push(cave2);
         }
 
     for (const next of neighbors) {
