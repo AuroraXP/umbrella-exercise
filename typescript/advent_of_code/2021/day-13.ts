@@ -144,7 +144,7 @@ console.log(" ");
 console.log("Part 2");
 console.log(" ");
 
-// Finish folding
+// Finish folding and - the letters are probably the visible output -
 
 let newPuzzle = rawMarkingList.slice();
 
@@ -168,7 +168,7 @@ let buildShow = new Array();
 
 for (let i = 0; i <= Ymax; i++){
 
-    let buildRow = `${i}`
+    let buildRow = new String();
 
     for (let j = 0; j <= Xmax; j++){
 
@@ -190,4 +190,6 @@ for (let i = 0; i <= Ymax; i++){
     buildShow.push(buildRow);
 }
 
-console.log(buildShow)
+// Now just read the letters!
+
+console.log("Now just read the letters!\n\n", buildShow)
