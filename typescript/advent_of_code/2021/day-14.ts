@@ -1,5 +1,4 @@
 import {readFile} from "node:fs/promises"
-import { pathToFileURL } from "node:url";
 
 const data = await readFile (new URL ("input/day-14.txt", import.meta.url), ("utf8"));
 const dataOverall = data.trimEnd().split("\n").map(String);
@@ -125,12 +124,6 @@ let min = Math.min(...charCountArr);
 
 console.log("The answer for Part 1 is: ", max - min);
 
+const controlMap = uniqueChars.map((entry, index) => [entry, charCountArr[index]] as [string, number]);
 
-
-
-
-console.log(" ");
-console.log("Part 2");
-console.log(" ");
-
-// Repeat for 40 steps
+console.log(new Map(controlMap));
