@@ -34,8 +34,6 @@ const counterMap = new Map<string,number>();
 
 function resolvePair( pair:string, stepsLeft:number){
 
-    console.log("step: ", stepsLeft);
-
     if (stepsLeft == 0){
         return;
     }
@@ -65,7 +63,7 @@ for (let i = 0; i < startingPolymer.length-1; i ++){
 
     counterMap.set(startingPolymer[i+1], counterMap.has(startingPolymer[i+1])?(counterMap.get(startingPolymer[i+1]) as number +1):1)
 
-    resolvePair(calcPair, 3);
+    resolvePair(calcPair, 10);
 
 }
 

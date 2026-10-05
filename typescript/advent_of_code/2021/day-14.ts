@@ -1,4 +1,5 @@
 import {readFile} from "node:fs/promises"
+import { start } from "node:repl";
 
 const data = await readFile (new URL ("input/day-14.txt", import.meta.url), ("utf8"));
 const dataOverall = data.trimEnd().split("\n").map(String);
@@ -127,3 +128,64 @@ console.log("The answer for Part 1 is: ", max - min);
 const controlMap = uniqueChars.map((entry, index) => [entry, charCountArr[index]] as [string, number]);
 
 console.log(new Map(controlMap));
+
+
+// --------------------------------------------------------------------------------------------------------------------
+
+
+console.log(" ");
+console.log("Part 2");
+console.log(" ");
+
+// Calculate for 40 steps
+
+
+console.log(startingPolymer)
+const rules = new Map(growthRules.map((entry) => entry.split(" -> ") as [string, string]));
+
+console.log(rules)
+
+const learningMap = new Map();
+// learning Map build: "pair" => [number of steps, resulting growth] (necessary for how log?)
+
+const counterMap = new Map<string,number>();
+
+
+let poly = startingPolymer.slice();
+
+
+
+
+function deriveBuild(pair:string, stepsLeft:number){
+
+    if (learningMap.has(pair)){
+
+        let [steps, growth] = learningMap.get(pair);
+
+        if (steps >= stepsLeft){
+            let derive = Number(steps) - stepsLeft
+
+            // console.log(growth) // testing function
+            // console.log(steps)
+            // console.log(stepsLeft)
+
+            for (let i = 0; i < derive; i++){
+                for (let p = 1; p < growth.length; p ++){
+                    growth = growth.slice(0,p) + growth.slice(p+1,);
+                }
+            }
+            // console.log(growth)
+            return growth;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
