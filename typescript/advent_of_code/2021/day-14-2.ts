@@ -30,12 +30,23 @@ const rules = new Map(growthRules.map((entry) => entry.split(" -> ") as [string,
 
 // console.log(rules);
 
-const counterMap = new Map<string,number>();
 
-function resolvePair( pair:string, stepsLeft:number){
+
+// Calculate 40 steps deep only once - cache count results 
+
+const cacheMap = new Map<string, Map<string, number>>();
+
+function resolvePair(pair:string, stepsLeft:number){
+    
+    const counterMap = new Map< string, number>();
 
     if (stepsLeft == 0){
-        return;
+        return new Map();
+    }
+
+    const key = pair + stepsLeft;
+    if (cacheMap.has(key)){
+        return cacheMap.get(key)!;
     }
 
     const insert = rules.get(pair) as string;
@@ -44,28 +55,40 @@ function resolvePair( pair:string, stepsLeft:number){
     counterMap.set(insert, counterMap.has(insert)?(counterMap.get(insert) as number +1):1)
 
     const newPair1 = pairSplit[0] + insert;
-
-    resolvePair(newPair1, stepsLeft-1);
+    const left = resolvePair(newPair1, stepsLeft-1);
 
     const newPair2 = insert + pairSplit[1]; 
-
-    resolvePair(newPair2, stepsLeft-1);
-
-}
-
-for (let i = 0; i < startingPolymer.length-1; i ++){
-
-    const calcPair = startingPolymer[i] + startingPolymer[i+1];
+    const right = resolvePair(newPair2, stepsLeft-1);
     
-    if (i == 0){
-        counterMap.set(startingPolymer[i], counterMap.has(startingPolymer[i])?(counterMap.get(startingPolymer[i]) as number +1):1)
+    for (const childMap of [left, right]){
+        for (const [letter, count] of childMap){
+            counterMap.set(letter, (counterMap.get(letter) ?? 0) + count);
+        }
     }
-
-    counterMap.set(startingPolymer[i+1], counterMap.has(startingPolymer[i+1])?(counterMap.get(startingPolymer[i+1]) as number +1):1)
-
-    resolvePair(calcPair, 10);
+   
+    cacheMap.set(key, counterMap);
+    return counterMap;
+    
 
 }
 
-console.log(counterMap);
+
+const ultimateCounts = new Map<string, number>();
+
+for (const letter of startingPolymer){
+    ultimateCounts.set(letter, (ultimateCounts.get(letter) ?? 0) + 1);
+}
+
+for (let i = 0; i < startingPolymer.length - 1; i++){
+    const calcPair = startingPolymer[i] + startingPolymer[i + 1];
+
+    for (const [letter, count] of resolvePair(calcPair, 40)){
+        ultimateCounts.set(letter, (ultimateCounts.get(letter) ?? 0) + count);
+    }
+}
+
+console.log(ultimateCounts);
+
+console.log(Math.max(...ultimateCounts.values())- Math.min(...ultimateCounts.values()))
+
 
